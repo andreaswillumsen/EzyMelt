@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EzyMelt Dashboard</title>
     <link rel="stylesheet" href="styles.css">
-
-    <!-- Chart.js (for grafer) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
-
-    <!-- Leaflet.js (for kart) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
 </head>
@@ -19,22 +15,24 @@
         <p id="weather-info">Laster værdata...</p>
 
         <div class="card">
-            <h2>Live Værdata (Tromsø)</h2>
-            <canvas id="weatherChart"></canvas>
-        </div>
-
-        <div class="card">
-            <h2>Forventet Nedbør Neste 24 Timer</h2>
-            <canvas id="precipitationChart"></canvas>
+            <h2>Anleggsliste</h2>
+            <button onclick="window.location.href='add_anlegg.html'">Legg til anlegg</button>
+            <ul id="anleggList"></ul>
         </div>
 
         <div class="card">
             <h2>Kartvisning</h2>
             <div id="map" style="height: 300px;"></div>
         </div>
-    </div>
 
+        <div class="footer">
+            <h2>Om EzyMelt</h2>
+            <p>EzyMelt er en innovativ plattform for energieffektiv styring av gatevarme.</p>
+            <p>Kontakt oss: support@ezymelt.no</p>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
+
 
