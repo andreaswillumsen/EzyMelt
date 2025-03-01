@@ -5,18 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EzyMelt Dashboard</title>
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Chart.js (for grafer) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+
+    <!-- Leaflet.js (for kart) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>EzyMelt Dashboard</h1>
-            <p>Bruker: Admin | Selskap: Tromsø Eiendom AS</p>
-            <button onclick="logout()">Logg ut</button>
-        </div>
+        <h1>EzyMelt Dashboard</h1>
+        <p id="weather-info">Laster værdata...</p>
 
         <div class="card">
             <h2>Live Værdata (Tromsø)</h2>
-            <p id="weather-info">Laster værdata...</p>
             <canvas id="weatherChart"></canvas>
         </div>
 
@@ -26,15 +29,12 @@
         </div>
 
         <div class="card">
-            <h2>Anleggsliste</h2>
-            <ul id="anleggList"></ul>
-        </div>
-
-        <div class="card">
             <h2>Kartvisning</h2>
             <div id="map" style="height: 300px;"></div>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
+
