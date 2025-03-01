@@ -67,22 +67,34 @@ document.addEventListener("DOMContentLoaded", async function() {
         if (canvasId === "precipitationChart") precipitationChartInstance = chartInstance;
     }
 
-    function initMap() {
-        const map = L.map('map').setView([lat, lon], 13);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(map);
+    async function fetchAnleggData() {
+        try {
+            const response = await fetch("/api/anlegg");
+            if (!response.ok) throw new Error("Kunne ikke hente anleggsliste");
+            
+            const anlegg = await response.json();
 
-        // Legg til markører for anlegg
-        const anlegg = [
-            { name: "Storgata", lat: 69.6500, lon: 18.9500 },
-            { name: "Havneterminalen", lat: 69.6510, lon: 18.9550 }
-        ];
-        anlegg.forEach(a => {
-            L.marker([a.lat, a.lon]).addTo(map).bindPopup(a.name);
-        });
+            const anleggList = document.getElementById("anleggList");
+            anleggList.innerHTML = ""; // Rens listen før oppdatering
+
+            const map = L.map("map").setView([lat, lon], 13);
+            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                attribution: "© OpenStreetMap contributors"
+            }).addTo(map);
+
+            anlegg.forEach(a => {
+                let li = document.createElement("li");
+                li.innerText = `${a.name} - ${a.status} | ${a.effekt} kW`;
+                anleggList.appendChild(li);
+
+                L.marker([a.lat, a.lon]).addTo(map).bindPopup(`<b>${a.name}</b><br>Status: ${a.status}<br>Effekt: ${a.effekt} kW`);
+            });
+        } catch (error) {
+            console.error("Feil ved henting av anlegg:", error);
+            document.getElementById("anleggList").innerText = "Kunne ikke laste anlegg.";
+        }
     }
 
     fetchWeatherData();
-    initMap();
+    fetchAnleggData();
 });
